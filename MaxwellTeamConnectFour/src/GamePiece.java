@@ -6,5 +6,7 @@ public class GamePiece {
 	public GamePiece(Colour col){
 		pieceColour = col;
 	}
+
+	//YOU LIKE THAt
 }
 
