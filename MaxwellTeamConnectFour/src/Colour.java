@@ -1,6 +1,6 @@
 
 public enum Colour {
 
-	//YOU LIKE THAt
-		Red,Blue
+	
+		Red,Blue,None;
 }

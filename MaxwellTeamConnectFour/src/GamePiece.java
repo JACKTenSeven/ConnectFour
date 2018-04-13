@@ -1,10 +1,14 @@
 
 public class GamePiece {
 	//0 is blue, 1 is red
-	public Colour pieceColour;
+	private Colour pieceColour;
 	
 	public GamePiece(Colour col){
 		pieceColour = col;
+	}
+	
+	public Colour getColour(){
+		return pieceColour;
 	}
 
 	//YOU LIKE THAt

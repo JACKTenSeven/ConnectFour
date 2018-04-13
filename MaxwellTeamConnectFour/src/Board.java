@@ -4,8 +4,16 @@ public class Board {
 	private int numBlues;
 	private int numReds;
 	
-	public GamePiece[][] board= new GamePiece[6][7];	
+	public GamePiece[][] board;	
 	
+	public Board(int rows, int cols){
+		board=new GamePiece[rows][cols];
+		for(int i = 0 ; i < board.length-1 ; i++){
+			for(int j = 0 ; j < board[0].length ; j++){
+				board[i][j] = new GamePiece(Colour.None);
+			}
+		}
+	}
 	/**
 	 * places piece of the desired colour at the top of the column desired
 	 * @param col	the column to place the piece
@@ -22,6 +30,7 @@ public class Board {
 		else if(colour== Colour.Blue){numBlues++;}
 		printBoard();
 		Colour winner = isWinner(rowNum,col);
+		System.out.println(winner);
 	}
 	/**
 	 * Makes the piece at the top of the column go
@@ -31,14 +40,14 @@ public class Board {
 	 */
 	private int pieceFall(int col, Colour colour){
 		for(int i = 1; i < board.length; i++){
-			if(i == board.length-1 && board[i][col] == null){
+			if(i == board.length-1 && board[i][col].getColour() == Colour.None){
 				board[i][col] = new GamePiece(colour);
 				return i;
 			}
-			else if(board[i][col] == null){
+			else if(board[i][col].getColour() == Colour.None){
 				continue;
 			}
-			else if(board[i][col] != null){
+			else if(board[i][col].getColour() != Colour.None){
 				board[i-1][col] = new GamePiece(colour);
 				return i-1;
 			}
@@ -50,22 +59,47 @@ public class Board {
 	}
 	
 	private Colour isWinner(int row, int col){
-		Colour colourChecking = board[row][col].pieceColour;
-		for(int i = -1 ; i <= 0 ; i++){
-			
+		Colour colourChecking = board[row][col].getColour();
+		int numInARow = 0;
+		//Checking the row
+		for(int i = 0 ; i < board.length ; i ++){
+			if(board[i][col].getColour() == colourChecking){
+				numInARow++;
+				if(numInARow >=4){
+					return colourChecking;
+				}
+			}
+			else{
+				numInARow = 0;
+			}
 		}
+		numInARow = 0;
+		//Checking the column
+		for(int i = 0 ; i < board[0].length ; i ++){
+			if(board[row][i].getColour() == colourChecking){
+				numInARow++;
+				if(numInARow >=4){
+					return colourChecking;
+				}
+			}
+			else{
+				numInARow = 0;
+			}
+		}
+		
+		
 		return null;
 	}
 	
 	public void printBoard(){
 		for(int i=0;i < board.length ; i++){
 			for(int j = 0 ; j < board[0].length ; j++){
-				if(board[i][j] == null){
+				if(board[i][j].getColour() == Colour.None){
 					System.out.print(" X");
 				}
-				else if(board[i][j].pieceColour == Colour.Red){
+				else if(board[i][j].getColour() == Colour.Red){
 					System.out.print(" R");
-				}else if(board[i][j].pieceColour == Colour.Blue){
+				}else if(board[i][j].getColour() == Colour.Blue){
 					System.out.print(" B");
 				}
 			}
