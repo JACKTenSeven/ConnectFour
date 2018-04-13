@@ -3,7 +3,7 @@ public class Board {
 
 	public GamePiece[][] board= new GamePiece[6][7];	
 	
-	public void changeBoard(int col, Colour colour){
+	public void placePiece(int col, Colour colour){
 		board[0][col] = new GamePiece(colour);
 		printBoard();
 		pieceFall(col,colour);
