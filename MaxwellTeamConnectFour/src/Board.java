@@ -24,7 +24,7 @@ public class Board {
 	 */
 	private void pieceFall(int col, Colour colour){
 		for(int i = 1; i < board.length; i++){
-			if(i == board.length-1 && board[i][board.length-1] == null){
+			if(i == board.length-1 && board[i][col] == null){
 				board[i][col] = new GamePiece(colour);
 			}
 			else if(board[i][col] == null){
