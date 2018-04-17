@@ -7,7 +7,7 @@ public class Driver  {
 		boolean gameEnd=false;
 		Colour player1;
 		Colour player2;
-		
+		//GOOD JOB
 		
 		player1 = Colour.Blue;
 		player2 = Colour.Red;

@@ -86,6 +86,31 @@ public class Board {
 			}
 		}
 		
+		numInARow = 0;
+		
+		int bottomOfDiagonalRow = row + col;
+		int bottomOfDiagonalCol = 0;
+		if(row + col > board.length-1){
+			bottomOfDiagonalRow = board.length-1;
+			bottomOfDiagonalCol = row+col - board.length-1;
+		}
+		
+		for(int i = 0; bottomOfDiagonalRow -i >= 0 
+				|| bottomOfDiagonalCol + i < board[0].length; i++){
+			
+			if(board[bottomOfDiagonalRow -i][bottomOfDiagonalCol + i].getColour() == colourChecking){
+				numInARow++;
+				if(numInARow >=4){
+					return colourChecking;
+				}
+			}
+			else{
+				numInARow = 0;
+			}
+		}
+		
+		
+		
 		
 		return null;
 	}
