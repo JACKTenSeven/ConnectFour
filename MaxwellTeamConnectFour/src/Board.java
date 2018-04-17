@@ -1,6 +1,5 @@
 
 public class Board {
-
 	private int numBlues;
 	private int numReds;
 	
