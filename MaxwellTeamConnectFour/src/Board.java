@@ -7,7 +7,7 @@ public class Board {
 	
 	public Board(int rows, int cols){
 		board=new GamePiece[rows][cols];
-		for(int i = 0 ; i < board.length-1 ; i++){
+		for(int i = 0 ; i < board.length ; i++){
 			for(int j = 0 ; j < board[0].length ; j++){
 				board[i][j] = new GamePiece(Colour.None);
 			}
@@ -19,11 +19,12 @@ public class Board {
 	 * @param colour	colour of the piece
 	 */
 	public void placePiece(int col, Colour colour){
+		
 		board[0][col] = new GamePiece(colour);
 	
 		int rowNum = pieceFall(col,colour);
 		
-		board[0][col] = null;
+		board[0][col] = new GamePiece(Colour.None);
 		
 		if(colour == Colour.Red){numReds++;}
 		else if(colour== Colour.Blue){numBlues++;}
@@ -58,6 +59,7 @@ public class Board {
 	}
 	
 	private Colour isWinner(int row, int col){
+		System.out.println(row + " " + col);
 		Colour colourChecking = board[row][col].getColour();
 		int numInARow = 0;
 		//Checking the row
@@ -90,14 +92,16 @@ public class Board {
 		
 		int bottomOfDiagonalRow = row + col;
 		int bottomOfDiagonalCol = 0;
-		if(row + col > board.length-1){
+		if((row + col) > board.length-1){
 			bottomOfDiagonalRow = board.length-1;
-			bottomOfDiagonalCol = row+col - board.length-1;
+			bottomOfDiagonalCol = row+col - (board.length-1);
+
 		}
+		System.out.println(bottomOfDiagonalRow + " " + bottomOfDiagonalCol);
 		
 		for(int i = 0; bottomOfDiagonalRow -i >= 0 
-				|| bottomOfDiagonalCol + i < board[0].length; i++){
-			
+				&& bottomOfDiagonalCol + i < board.length; i++){
+			 
 			if(board[bottomOfDiagonalRow -i][bottomOfDiagonalCol + i].getColour() == colourChecking){
 				numInARow++;
 				if(numInARow >=4){
@@ -112,7 +116,7 @@ public class Board {
 		
 		
 		
-		return null;
+		return Colour.None;
 	}
 	
 	public void printBoard(){

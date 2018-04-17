@@ -21,7 +21,7 @@ public class Driver  {
 			System.out.println("Turn forfiet");
 		}
 		else{
-		playerDrop(k.nextInt()-1,player1);
+		playerDrop(loc-1,player1);
 		}
 		
 		
@@ -33,7 +33,7 @@ public class Driver  {
 			System.out.println("Turn forfiet");
 		}
 		else{
-		playerDrop(k.nextInt()-1,player1);
+		playerDrop(loc-1,player2);
 		}
 	
 		
@@ -43,7 +43,8 @@ public class Driver  {
 	}
 	
 	  static void playerDrop(int col, Colour playerCol){
-		gameBoard.placePiece(col, playerCol);
+		  System.out.println("HERE");
+		  gameBoard.placePiece(col, playerCol);
 	}
 
 }
