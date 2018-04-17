@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Driver  {
-	public static Board gameBoard = new Board();
+	public static Board gameBoard = new Board(6,7);
 	public static void main(String[]args){
 		Scanner k = new Scanner(System.in);
 		boolean gameEnd=false;
