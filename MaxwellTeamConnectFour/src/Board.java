@@ -88,6 +88,8 @@ public class Board {
 			}
 		}
 		
+		
+		
 		numInARow = 0;
 		
 		int bottomOfDiagonalRow = row + col;
@@ -97,7 +99,6 @@ public class Board {
 			bottomOfDiagonalCol = row+col - (board.length-1);
 
 		}
-		System.out.println(bottomOfDiagonalRow + " " + bottomOfDiagonalCol);
 		
 		for(int i = 0; bottomOfDiagonalRow -i >= 0 
 				&& bottomOfDiagonalCol + i < board.length; i++){
@@ -113,7 +114,30 @@ public class Board {
 			}
 		}
 		
+		numInARow = 0;
 		
+		int topOfDiagonalRow = row - col;
+		int topOfDiagonalCol = 0;
+		if((row - col) < 0){
+			topOfDiagonalRow = 0;
+			topOfDiagonalCol = -1*(row-col);
+
+		}
+		System.out.println(topOfDiagonalRow + " " + topOfDiagonalCol);
+		
+		for(int i = 0; topOfDiagonalRow + i < board.length
+				&& topOfDiagonalCol + i < board[0].length; i++){
+			 
+			if(board[topOfDiagonalRow + i][topOfDiagonalCol + i].getColour() == colourChecking){
+				numInARow++;
+				if(numInARow >=4){
+					return colourChecking;
+				}
+			}
+			else{
+				numInARow = 0;
+			}
+		}
 		
 		
 		return Colour.None;
@@ -136,6 +160,6 @@ public class Board {
 		System.out.println();
 	}
 
-	//YOU LIKE THAt
+
 	
 }
