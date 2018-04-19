@@ -57,9 +57,15 @@ public class Board {
 		}
 		return 0;
 	}
-	
+	/**
+	 * checks the rows, columns and diagonals around the piece specified 
+	 * to determine if their is four in a row of the colour
+	 * @param row	The row position of the piece tested
+	 * @param col	The column position of the piece tested
+	 * @return	The colour of the person who has one, or none if no-one has won.
+	 */
 	private Colour isWinner(int row, int col){
-		System.out.println(row + " " + col);
+		
 		Colour colourChecking = board[row][col].getColour();
 		int numInARow = 0;
 		//Checking the row
@@ -92,6 +98,8 @@ public class Board {
 		
 		numInARow = 0;
 		
+		
+		//Checking the diagonal from bottom left to top right
 		int bottomOfDiagonalRow = row + col;
 		int bottomOfDiagonalCol = 0;
 		if((row + col) > board.length-1){
@@ -99,7 +107,7 @@ public class Board {
 			bottomOfDiagonalCol = row+col - (board.length-1);
 
 		}
-		//yes
+
 		for(int i = 0; bottomOfDiagonalRow -i >= 0 
 				&& bottomOfDiagonalCol + i < board.length; i++){
 			 
@@ -115,7 +123,7 @@ public class Board {
 		}
 		
 		numInARow = 0;
-		
+		//checking the diagonal from top left to bottom right
 		int topOfDiagonalRow = row - col;
 		int topOfDiagonalCol = 0;
 		if((row - col) < 0){
@@ -123,7 +131,7 @@ public class Board {
 			topOfDiagonalCol = -1*(row-col);
 
 		}
-		System.out.println(topOfDiagonalRow + " " + topOfDiagonalCol);
+		
 		
 		for(int i = 0; topOfDiagonalRow + i < board.length
 				&& topOfDiagonalCol + i < board[0].length; i++){
