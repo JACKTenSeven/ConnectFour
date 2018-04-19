@@ -58,7 +58,7 @@ public class Driver {
 
 				System.out.println("Computer (Red) Turn");
 				loc = r.nextInt(7-1)+1;
-				playerDrop(loc - 1, player1);
+				playerDrop(loc - 1, player2);
 				
 
 			}
