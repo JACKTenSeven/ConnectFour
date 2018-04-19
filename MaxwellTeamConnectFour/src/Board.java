@@ -23,15 +23,16 @@ public class Board {
 		board[0][col] = new GamePiece(colour);
 	
 		int rowNum = pieceFall(col,colour);
-		
-		board[0][col] = new GamePiece(Colour.None);
-		
+		if(rowNum != 0){
+			board[0][col] = new GamePiece(Colour.None);
+		}
 		if(colour == Colour.Red){numReds++;}
 		else if(colour== Colour.Blue){numBlues++;}
 		printBoard();
 		Colour winner = isWinner(rowNum,col);
 		System.out.println(winner);
 	}
+	
 	/**
 	 * Makes the piece at the top of the column go
 	 * to the lowest possible position on the board
@@ -149,6 +150,15 @@ public class Board {
 		
 		
 		return Colour.None;
+	}
+	
+	public boolean colFull(int col){
+		for(int i = 0 ; i < board.length ; i ++){
+			if(board[i][col].getColour().equals(Colour.None)){
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public void printBoard(){

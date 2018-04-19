@@ -11,6 +11,5 @@ public class GamePiece {
 		return pieceColour;
 	}
 
-	//YOU LIKE THAt
 }
 
