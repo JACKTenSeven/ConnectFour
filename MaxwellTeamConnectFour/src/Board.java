@@ -99,7 +99,7 @@ public class Board {
 			bottomOfDiagonalCol = row+col - (board.length-1);
 
 		}
-		
+		//yes
 		for(int i = 0; bottomOfDiagonalRow -i >= 0 
 				&& bottomOfDiagonalCol + i < board.length; i++){
 			 
