@@ -23,7 +23,7 @@ public class Driver {
 		if (selection == 1) {
 			while (!gameEnd) {
 
-				System.out.println("Player 2 (Red) Turn");
+				System.out.println("Player 1 (Blue) Turn");
 				System.out.println("Enter the number key of the column you wish to place a game piece");
 				loc = k.nextInt();
 				if (loc > 7) {
@@ -32,6 +32,18 @@ public class Driver {
 				} else {
 					playerDrop(loc - 1, player1);
 				}
+				
+
+				System.out.println("Player 2 (Red) Turn");
+				System.out.println("Enter the number key of the column you wish to place a game piece");
+				loc = k.nextInt();
+				if (loc > 7) {
+					System.out.println("Invalid entry");
+					System.out.println("Turn forfiet");
+				} else {
+					playerDrop(loc - 1, player2);
+				}
+
 
 			}
 		}
@@ -67,7 +79,7 @@ public class Driver {
 	}
 
 	static void playerDrop(int col, Colour playerCol) {
-		gameBoard.placePiece(col, playerCol);
+		System.out.println(gameBoard.placePiece(col, playerCol));
 	}
 
 }

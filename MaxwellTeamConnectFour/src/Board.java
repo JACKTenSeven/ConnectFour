@@ -14,11 +14,12 @@ public class Board {
 		}
 	}
 	/**
-	 * places piece of the desired colour at the top of the column desired
-	 * @param col	the column to place the piece
-	 * @param colour	colour of the piece
+	 * 
+	 * @param col	The column to place the piece
+	 * @param colour	The colour the piece should be
+	 * @return	The colour that has won, returns none if no one won
 	 */
-	public void placePiece(int col, Colour colour){
+	public Colour placePiece(int col, Colour colour){
 		
 		board[0][col] = new GamePiece(colour);
 	
@@ -30,7 +31,7 @@ public class Board {
 		else if(colour== Colour.Blue){numBlues++;}
 		printBoard();
 		Colour winner = isWinner(rowNum,col);
-		System.out.println(winner);
+		return winner;
 	}
 	
 	/**
