@@ -30,74 +30,82 @@ public class GUIDriver extends Application {
 		
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.TOP_CENTER);
-		VBox vbox = new VBox();
-		vbox.setAlignment(Pos.CENTER);
-		Button button1 = new Button();
-		Button button2 = new Button();
-		Button button3 = new Button();
-		Button button4 = new Button();
-		Button button5 = new Button();
-		Button button6 = new Button();
-		Button button7 = new Button();
-		Circle slot0 = new Circle();
-		
-		
-		grid.add(button1, 0,0);
-		grid.add(button2,1,0);
-		grid.add(button3, 2,0);
-		grid.add(button4,3,0);
-		grid.add(button5, 4,0);
-		grid.add(button6,5,0);
-		grid.add(button7, 6,0);
-		
-		vbox.getChildren().add(slot0);
-		grid.add(vbox, 4, 5);
-		
-		
-		
-		button1.setText("Place 1");
-		button2.setText("Place 2");
-		button3.setText("Place 3");
-		button4.setText("Place 4");
-		button5.setText("Place 5");
-		button6.setText("Place 6");
-		button7.setText("Place 7");
+		//VBox vbox = new VBox();
+	//	vbox.setAlignment(Pos.CENTER);
 		
 		
 	
 		
-		Scene scene = new Scene(grid, 600, 200);
 		
-		button1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-            	Button button3 = new Button();
-            
-            	
-            }
-        });
-		
-		button2.addEventHandler(MouseEvent.MOUSE_ENTERED, 
-				new EventHandler<MouseEvent>() {
-			 @Override
-			public void handle(MouseEvent e){
-				button2.setText("yes");
+		Circle[][] circ = new Circle[6][7];
+		for(int i = 0 ; i < 6 ; i++){
+			for(int j = 0 ; j < 7 ; j++){
+				circ[i][j] = new Circle(0,0,25);
+				if(Math.random() > 0.5)
+					circ[i][j].setFill(javafx.scene.paint.Color.BLUE); //grey
+				else
+					circ[i][j].setFill(javafx.scene.paint.Color.DARKRED);
+				
+				circ[i][j].setOpacity(0.6);
+				grid.add(circ[i][j],j,i+1);
 			}
-		});
+		}
 		
-		button2.addEventHandler(MouseEvent.MOUSE_EXITED, 
-				new EventHandler<MouseEvent>() {
-			 @Override
-			public void handle(MouseEvent e){
-				button2.setText("Place 2");
-			}
-		});
+		Button[] buttons = new Button[7];
+		for(int i = 0 ; i < buttons.length ; i++){
+			int j = i;
+			
+			buttons[i] = new Button();
+			grid.add(buttons[i], i, 0);
+			
+			buttons[i].addEventHandler(MouseEvent.MOUSE_ENTERED, 
+					new EventHandler<MouseEvent>() {
+				 @Override
+				public void handle(MouseEvent e){
+					highlightColumn(j, circ);
+					
+				}
+			});
+			
+			buttons[i].addEventHandler(MouseEvent.MOUSE_EXITED, 
+					new EventHandler<MouseEvent>() {
+				 @Override
+				public void handle(MouseEvent e){
+					 unHighlightColumn(j, circ);
+					
+				}
+			});
+			
+			buttons[i].setText("Here");
+			
+		}
+		
+	
+	
+		
+		Scene scene = new Scene(grid, 600, 500);
 
 
-		window.setTitle("My JavaFX Application");
+		window.setTitle("Connect four");
 		window.setScene(scene);
 		window.show();
 
+	}
+	
+	private static void highlightColumn(int col,Circle[][] circ){
+		for(int j = 0 ; j < 6 ; j++){
+			
+			
+			circ[j][col].setOpacity(1);
+		}
+	}
+	
+	private static void unHighlightColumn(int col,Circle[][] circ){
+		for(int j = 0 ; j < 6 ; j++){
+			
+			
+			circ[j][col].setOpacity(0.6);
+		}
 	}
 	
 	
