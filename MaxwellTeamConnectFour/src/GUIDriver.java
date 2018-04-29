@@ -41,15 +41,14 @@ public class GUIDriver extends Application {
 		for(int i = 0 ; i < 6 ; i++){
 			for(int j = 0 ; j < 7 ; j++){
 				circ[i][j] = new Circle(0,0,25);
-				if(Math.random() > 0.5)
-					circ[i][j].setFill(javafx.scene.paint.Color.BLUE); //grey
-				else
-					circ[i][j].setFill(javafx.scene.paint.Color.DARKRED);
 				
+				//circ[i][j].setFill(javafx.scene.paint.Color.GREY); //grey
 				circ[i][j].setOpacity(0.6);
 				grid.add(circ[i][j],j,i+1);
 			}
 		}
+		
+		upDateBoardColour(circ);
 		
 		Button[] buttons = new Button[7];
 		for(int i = 0 ; i < buttons.length ; i++){
@@ -78,6 +77,16 @@ public class GUIDriver extends Application {
 			
 			buttons[i].setText("Here");
 			
+
+
+			buttons[i].setOnAction(new EventHandler<ActionEvent>() {
+				@Override public void handle(ActionEvent e) {
+					
+					gameBoard.placePiece(j, Colour.Blue);
+					upDateBoardColour(circ);
+				}
+			});
+			
 		}
 		
 	
@@ -97,6 +106,22 @@ public class GUIDriver extends Application {
 			
 			
 			circ[j][col].setOpacity(1);
+		}
+	}
+	
+	private static void upDateBoardColour(Circle[][] circ) {
+		for(int i = 0 ; i < circ.length ; i ++){
+			for(int j = 0 ; j < circ[0].length; j++) {
+				if(gameBoard.board[i][j].getColour().equals(Colour.Blue)) {
+					circ[i][j].setFill(javafx.scene.paint.Color.BLUE); 
+				}
+				else if(gameBoard.board[i][j].getColour().equals(Colour.Red)) {
+					circ[i][j].setFill(javafx.scene.paint.Color.RED); 
+				}
+				else {
+					circ[i][j].setFill(javafx.scene.paint.Color.GREY); 
+				}
+			}
 		}
 	}
 	
