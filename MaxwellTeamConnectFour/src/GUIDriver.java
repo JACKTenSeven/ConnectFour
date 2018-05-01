@@ -24,6 +24,9 @@ public class GUIDriver extends Application {
 	public static Colour currentTurn;
 	public static boolean isWinner = false;
 	public static Colour gameWinner;
+	
+	
+	static int a;
 	public static void main(String[] args) {
 		launch(args);
 
@@ -78,15 +81,19 @@ public class GUIDriver extends Application {
 				@Override
 				public void handle(MouseEvent e) {
 					highlightColumn(j, circ);
-
-				}
+					highLightPiece(circ,j);
+				}	
 			});
 
 			buttons[i].addEventHandler(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent e) {
 					unHighlightColumn(j, circ);
-
+				
+					if(a != -1){
+						circ[a][j].setFill(javafx.scene.paint.Color.GREY);
+					}
+					upDateBoardColour(circ);
 				}
 			});
 
@@ -97,14 +104,20 @@ public class GUIDriver extends Application {
 				public void handle(ActionEvent e) {
 					if (isWinner) {
 						turnAndWinnerText.setText(gameWinner + " Already won");
-					} else if (gameBoard.colFull(j) != true) {
+					} 
+					
+					else if (gameBoard.colFull(j) != true) {
 						Colour winner = gameBoard.placePiece(j, currentTurn);
+						
 						upDateBoardColour(circ);
+						
 						if (currentTurn == Colour.Red)
 							currentTurn = Colour.Blue;
 						else
 							currentTurn = Colour.Red;
-
+						
+						highLightPiece(circ,j);
+						
 						if (winner == Colour.None) {
 							turnAndWinnerText.setText(currentTurn + "'s turn");
 						} else {
@@ -116,7 +129,8 @@ public class GUIDriver extends Application {
 					} else {
 						turnAndWinnerText.setText("Redo, " + currentTurn);
 					}
-
+					
+				
 				}
 			});
 
@@ -137,6 +151,19 @@ public class GUIDriver extends Application {
 		}
 	}
 
+	private static void highLightPiece(Circle[][] circ, int col){
+		highlightColumn(col, circ);
+		a = gameBoard.topRowAvailable(col);
+		if(a != -1){
+			if(currentTurn == Colour.Blue)
+			circ[a][col].setFill(javafx.scene.paint.Color.BLUE);
+			
+			if(currentTurn == Colour.Red)
+				circ[a][col].setFill(javafx.scene.paint.Color.RED);
+		}
+	
+	}
+	
 	private static void upDateBoardColour(Circle[][] circ) {
 		for (int i = 0; i < circ.length; i++) {
 			for (int j = 0; j < circ[0].length; j++) {

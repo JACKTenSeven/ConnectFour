@@ -34,6 +34,15 @@ public class Board {
 		return winner;
 	}
 	
+	public int topRowAvailable(int col){
+		for(int i = board.length -1 ; i > 0 ; i--){
+			if(board[i][col].getColour() == Colour.None){
+				return i;
+			}
+		}
+		return -1;
+	}
+	
 	/**
 	 * Makes the piece at the top of the column go
 	 * to the lowest possible position on the board
